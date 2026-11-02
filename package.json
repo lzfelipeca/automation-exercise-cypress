@@ -1,7 +1,7 @@
 {
   "name": "automation-exercise-cypress",
   "version": "1.0.0",
-  "description": "Trabalho de Conclusão de Disciplina — Automação Web com Cypress (Automation Exercise)",
+  "description": "TCD - Automação Web com Cypress (Automation Exercise)",
   "author": "Luiz Felipe Madera Almeida",
   "license": "MIT",
   "scripts": {

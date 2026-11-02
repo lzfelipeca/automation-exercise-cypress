@@ -1,85 +1,56 @@
-# Automation Exercise — Automação Web com Cypress
+# automation-exercise-cypress
 
-Trabalho de Conclusão da disciplina **Automação Web com Cypress** (Pós-graduação em Automação de Testes).
+Trabalho de conclusão da disciplina de Automação Web com Cypress da pós em Automação de Testes.
 
-Projeto que automatiza, com Cypress, os casos de teste da página
-[Test Cases](https://automationexercise.com/test_cases) da aplicação fictícia
-[Automation Exercise](https://automationexercise.com).
+Automação dos casos de teste do site [Automation Exercise](https://automationexercise.com), seguindo os cenários da página [Test Cases](https://automationexercise.com/test_cases).
 
-**Autor:** Luiz Felipe Madera Almeida — [GitHub](https://github.com/lzfelipeca) · [LinkedIn](https://linkedin.com/in/lzfelipealmeida)
+## Casos automatizados
 
-## Casos de teste implementados
+- Test Case 1: Register User
+- Test Case 2: Login User with correct email and password
+- Test Case 3: Login User with incorrect email and password
+- Test Case 4: Logout User
+- Test Case 5: Register User with existing email
+- Test Case 8: Verify All Products and product detail page
+- Test Case 9: Search Product
+- Test Case 10: Verify Subscription in home page
+- Test Case 15: Place Order: Register before Checkout
+- Test Case 16: Place Order: Login before Checkout
 
-| Caso | Descrição |
-|------|-----------|
-| 1  | Register User |
-| 2  | Login User with correct email and password |
-| 3  | Login User with incorrect email and password |
-| 4  | Logout User |
-| 5  | Register User with existing email |
-| 8  | Verify All Products and product detail page |
-| 9  | Search Product |
-| 10 | Verify Subscription in home page |
-| 15 | Place Order: Register before Checkout |
-| 16 | Place Order: Login before Checkout |
+## Stack
 
-## Tecnologias
+- Cypress
+- cypress-mochawesome-reporter
+- Faker (massa de dados)
+- GitHub Actions
 
-- [Cypress](https://www.cypress.io/) — framework de automação
-- [cypress-mochawesome-reporter](https://github.com/LironEr/cypress-mochawesome-reporter) — relatórios HTML
-- [@faker-js/faker](https://fakerjs.dev/) — geração de massa de dados dinâmica
-- GitHub Actions — integração contínua
+## Organização
 
-## Estrutura do projeto
+Os testes ficam em `cypress/e2e/automation-exercise.cy.js` e as ações de cada página foram separadas em módulos dentro de `cypress/modules` (menu, login, cadastro, produtos, carrinho, checkout e rodapé).
 
-```
-.
-├── .github/workflows/cypress.yml   # Pipeline de CI (execução + publicação do relatório)
-├── cypress
-│   ├── e2e
-│   │   └── automation-exercise.cy.js   # Spec do trabalho final (casos 1,2,3,4,5,8,9,10,15,16)
-│   ├── fixtures
-│   │   └── pagamento.json              # Dados de pagamento e comentário do pedido
-│   ├── modules                         # Modularização (ações e validações por área)
-│   │   ├── cadastro/   carrinho/   checkout/
-│   │   ├── login/      menu/       produtos/   rodape/
-│   └── support
-│       ├── commands.js                 # Comandos customizados (pré-condições via API)
-│       ├── e2e.js                      # Registro do reporter e configurações globais
-│       └── factories/usuario.js        # Fábrica de usuários com Faker
-└── cypress.config.js
-```
+Nos cenários que precisam de um usuário já cadastrado (2, 4, 5 e 16), o usuário é criado pela API do próprio site antes do teste, usando comandos customizados em `cypress/support/commands.js`. Assim a tela é usada só no que está sendo testado.
 
-## Boas práticas aplicadas
+Cada execução gera um usuário novo com o Faker, então os testes não dependem de dados fixos.
 
-- **Modularização:** cada área da aplicação (menu, login, cadastro, produtos, carrinho, checkout, rodapé) tem seu módulo com ações e validações; a spec apenas orquestra o fluxo de cada caso.
-- **Seletores estáveis:** prioridade para atributos `data-qa` e `id` expostos pela aplicação; sem XPath.
-- **Massa de dados dinâmica:** cada teste gera um usuário único com Faker, garantindo independência entre os testes e entre execuções.
-- **Pré-condições via API:** nos casos que exigem um usuário já cadastrado (2, 4, 5 e 16), o usuário é criado pela API pública (`/api/createAccount`) com comandos customizados — a interface é usada só para o que está sendo testado.
-- **Limpeza de dados:** todo usuário criado é excluído ao final do teste (pela interface, quando faz parte do caso, ou via API).
-- **Estabilidade:** bloqueio dos domínios de anúncios (`blockHosts`) que interferem na navegação, `retries` em modo `run` e timeouts ajustados ao tempo de resposta do site.
-- **Dados sensíveis ocultos no log:** senha e dados do cartão são digitados com `{ log: false }`.
-
-## Como executar localmente
-
-Pré-requisito: Node.js 18+.
+## Como rodar
 
 ```bash
 npm install
-
-# modo interativo
-npm run cy:open
-
-# modo headless (gera o relatório)
 npm test
 ```
 
-O relatório HTML é gerado em `cypress/reports/index.html`.
+Para abrir o Cypress no modo interativo:
 
-## Integração contínua
+```bash
+npm run cy:open
+```
 
-O workflow `.github/workflows/cypress.yml` roda a cada `push`/`pull request` na branch `main` (e manualmente, via *Run workflow*):
+O relatório fica em `cypress/reports/index.html`.
 
-1. Instala as dependências e executa a spec do trabalho final no Chrome.
-2. Publica o relatório Mochawesome como artefato (**relatorio-mochawesome**), disponível na aba **Actions** → execução → *Artifacts*, mesmo quando há falhas.
-3. Em caso de falha, publica também as screenshots.
+## Pipeline
+
+A pipeline roda a cada push na `main`. No final da execução o relatório do Mochawesome fica disponível em Artifacts (`relatorio-mochawesome`).
+
+---
+
+Luiz Felipe Almeida · [LinkedIn](https://linkedin.com/in/lzfelipealmeida)

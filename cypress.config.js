@@ -4,7 +4,7 @@ module.exports = defineConfig({
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
     reportDir: 'cypress/reports',
-    reportPageTitle: 'Automation Exercise — Relatório de Testes',
+    reportPageTitle: 'Relatório de Testes - Automation Exercise',
     charts: true,
     embeddedScreenshots: true,
     inlineAssets: true,
@@ -22,7 +22,7 @@ module.exports = defineConfig({
       runMode: 2,
       openMode: 0
     },
-    // Bloqueia anúncios do site (Google Ads / vignette) que quebram a navegação
+    // bloqueia os anúncios que atrapalham a navegação
     blockHosts: [
       '*googlesyndication.com',
       '*doubleclick.net',

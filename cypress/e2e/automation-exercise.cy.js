@@ -9,7 +9,7 @@ import checkout from '../modules/checkout'
 import rodape from '../modules/rodape'
 import { gerarUsuario } from '../support/factories/usuario'
 
-describe('Automation Exercise — Trabalho de Conclusão', () => {
+describe('Automation Exercise', () => {
   let usuario
 
   beforeEach(() => {

@@ -1,8 +1,3 @@
-// Comandos customizados de apoio (pré-condições e limpeza via API).
-// A API pública do Automation Exercise é usada para preparar a massa de dados
-// dos cenários que exigem um usuário já existente (casos 2, 4, 5 e 16),
-// deixando a interface gráfica apenas para o que está sendo testado.
-
 const parseBody = (body) => (typeof body === 'string' ? JSON.parse(body) : body)
 
 Cypress.Commands.add('criarUsuarioViaApi', (usuario) => {

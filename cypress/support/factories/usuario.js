@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
 
-// Gera um usuário único a cada execução, evitando conflito de e-mail entre testes.
 export function gerarUsuario() {
   const primeiroNome = faker.person.firstName()
   const sobrenome = faker.person.lastName()

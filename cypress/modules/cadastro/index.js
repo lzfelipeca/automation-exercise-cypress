@@ -49,7 +49,6 @@ class Cadastro {
     cy.get('[data-qa="continue-button"]').click()
   }
 
-  // Fluxo completo de cadastro via interface (reutilizado nos casos 1 e 15)
   cadastrarUsuario(usuario) {
     this.validarFormularioNovoUsuario()
     this.iniciarCadastro(usuario.nome, usuario.email)
