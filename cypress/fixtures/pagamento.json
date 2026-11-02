@@ -1,0 +1,8 @@
+{
+  "nomeNoCartao": "QA Automacao",
+  "numeroCartao": "4111111111111111",
+  "cvc": "123",
+  "mesValidade": "12",
+  "anoValidade": "2030",
+  "comentarioPedido": "Pedido gerado por teste automatizado com Cypress."
+}
